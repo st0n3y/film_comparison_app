@@ -45,7 +45,7 @@ export default class App extends Component {
     return ( 
       <div>
         <div>
-          <h1>Film Info</h1>
+          <h1>Film Comparison</h1>
         </div>
         <div>
           {

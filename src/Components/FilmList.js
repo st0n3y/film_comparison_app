@@ -10,14 +10,14 @@ const FilmList = props => {
   results.push(props.film2.data);
   console.log(results);
   let films;
-  if(results.Error) {
+  if(results[0].Error || results[1].Error) {
     films = <NoFilms />
   } else {
     films = results.map(film => <FilmPanel title={film.Title} poster={film.Poster} rating={film.Metascore} key={film.imdbID} />);
   }
 
   return(
-    <div>
+    <div className="film-list">
       {films}
     </div>
   );

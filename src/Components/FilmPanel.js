@@ -3,7 +3,7 @@ import React from 'react';
 const FilmPanel = props => {
 
   return (
-    <div>
+    <div className="film-panel">
       <h2>{props.title}</h2>
       {
         (props.poster == "N/A")

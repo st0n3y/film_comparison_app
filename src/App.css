@@ -1,0 +1,9 @@
+.film-panel {
+  display: inline-block;
+  margin: 10px;
+  border: 1px solid red;
+}
+
+input {
+  margin: 2px;
+}
