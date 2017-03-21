@@ -9,51 +9,39 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      film1: [],
-      film2: [],
+      films: [],
       loading: true,
     };
   }
 
-  componentDidMount() {
-    this.performSearch();
-  }
+  
 
   performSearch = (query1 = "la la land", query2 = "moonlight") => {
-    const filmArray =[];
-    this.axiosQuery1(query1);
-    this.axiosQuery2(query2);
-    
-  }
+    const filmArray = [];
 
-  axiosQuery1 = (query) => {
-    axios.get(`http://www.omdbapi.com/?t=${query}`)
-      .then(response => {
-        this.setState({
-          film1: response,
-          loading: false
-        })
-      })
-      .catch(error => {
-        console.log("Error fetching or parsing data", error);
-      });
+    axios.get(`http://www.omdbapi.com/?t=${query1}`)
+          .then(response => {
+            filmArray.push(response);
+          })
+          .then(() => {
+            axios.get(`http://www.omdbapi.com/?t=${query2}`)
+                  .then(response => {
+                    filmArray.push(response);
+                  })
+                  .then(() => {
+                    this.setState({
+                      films: filmArray,
+                      loading: false
+                    })
+                  })
+          })
+          .catch(error => {
+            console.log("Error fetching or parsing data", error);
+          });
   }
-
-  axiosQuery2 = (query) => {
-    axios.get(`http://www.omdbapi.com/?t=${query}`)
-      .then(response => {
-        this.setState({
-          film2: response,
-          loading: false
-        })
-      })
-      .catch(error => {
-        console.log("Error fetching or parsing data", error);
-      });
-  }  
 
   render() {
-    
+    console.log("App component state: ", this.state);
     return ( 
       <div>
         <div>
@@ -63,7 +51,7 @@ export default class App extends Component {
           {
             (this.state.loading)
             ? <h3>Loading...</h3>
-            : <FilmList film1={this.state.film1} film2={this.state.film2} />
+            : <FilmList film1={this.state.films[0]} film2={this.state.films[1]} />
           }
         </div>
         <SearchForm onSearch={this.performSearch} />
@@ -71,5 +59,5 @@ export default class App extends Component {
     );
 
   }
-  
+
 }

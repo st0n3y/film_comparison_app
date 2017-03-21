@@ -4,9 +4,11 @@ import NoFilms from './NoFilms';
 
 const FilmList = props => {
   console.log("FilmList Props: ", props);
+  
   const results = [];
   results.push(props.film1.data);
   results.push(props.film2.data);
+  console.log(results);
   let films;
   if(results.Error) {
     films = <NoFilms />
@@ -15,9 +17,9 @@ const FilmList = props => {
   }
 
   return(
-    <ul>
+    <div>
       {films}
-    </ul>
+    </div>
   );
 
 }

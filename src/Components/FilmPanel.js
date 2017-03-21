@@ -3,7 +3,7 @@ import React from 'react';
 const FilmPanel = props => {
 
   return (
-    <li>
+    <div>
       <h2>{props.title}</h2>
       {
         (props.poster == "N/A")
@@ -11,7 +11,7 @@ const FilmPanel = props => {
         : <img src={props.poster} />
       }
       <h3>{props.rating}</h3>
-    </li>
+    </div>
   );
 
 };
