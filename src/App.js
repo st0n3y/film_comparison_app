@@ -11,7 +11,7 @@ export default class App extends Component {
     this.state = {
       film1: [],
       film2: [],
-      loading: true
+      loading: true,
     };
   }
 
@@ -20,15 +20,30 @@ export default class App extends Component {
   }
 
   performSearch = (query1 = "la la land", query2 = "moonlight") => {
-    axiosQuery(query1);
-    axiosQuery(query2);
+    const filmArray =[];
+    this.axiosQuery1(query1);
+    this.axiosQuery2(query2);
+    
   }
 
-  axiosQuery = (query) => {
+  axiosQuery1 = (query) => {
     axios.get(`http://www.omdbapi.com/?t=${query}`)
       .then(response => {
         this.setState({
-          films: response,
+          film1: response,
+          loading: false
+        })
+      })
+      .catch(error => {
+        console.log("Error fetching or parsing data", error);
+      });
+  }
+
+  axiosQuery2 = (query) => {
+    axios.get(`http://www.omdbapi.com/?t=${query}`)
+      .then(response => {
+        this.setState({
+          film2: response,
           loading: false
         })
       })
@@ -38,8 +53,7 @@ export default class App extends Component {
   }  
 
   render() {
-    console.log("this.state", this.state);
-    console.log("this.state.films", this.state.films);
+    
     return ( 
       <div>
         <div>
@@ -49,11 +63,13 @@ export default class App extends Component {
           {
             (this.state.loading)
             ? <h3>Loading...</h3>
-            : <FilmList data={this.state.films} />
+            : <FilmList film1={this.state.film1} film2={this.state.film2} />
           }
         </div>
         <SearchForm onSearch={this.performSearch} />
       </div>
     );
+
   }
+  
 }

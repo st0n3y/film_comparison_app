@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FilmPanel = props => {
-  console.log("FilmPanel title: ", props.title)
+
   return (
     <li>
       <h2>{props.title}</h2>
@@ -13,6 +13,7 @@ const FilmPanel = props => {
       <h3>{props.rating}</h3>
     </li>
   );
+
 };
 
 export default FilmPanel;
