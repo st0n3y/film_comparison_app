@@ -64,7 +64,7 @@ export default class App extends Component {
           {
             (this.state.loading)
             ? <h3>Loading...</h3>
-            : <FilmList film1={film1} film2={film2} hidden={this.state.hidden} />
+            : <FilmList film1={film1} film2={film2} hidden={this.state.hidden} onGuess={this.revealScores} />
           }
         </div>
         <SearchForm onSearch={this.performSearch} />
