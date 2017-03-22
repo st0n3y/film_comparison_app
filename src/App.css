@@ -1,9 +1,26 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Antic', sans-serif;
+}
+
+h1 {
+  font-family: 'Cinzel Decorative', cursive;
+}
+
 .film-panel {
   display: inline-block;
   margin: 10px;
+  padding: 5px;
   border: 1px solid red;
 }
 
 input {
   margin: 2px;
+}
+
+.hidden {
+  visibility: hidden;
 }

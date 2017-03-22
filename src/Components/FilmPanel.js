@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const FilmPanel = props => {
+export default class FilmPanel extends Component {
 
-  return (
-    <div className="film-panel">
-      <h2>{props.title}</h2>
-      {
-        (props.poster == "N/A")
-        ? <img src="http://placehold.it/300x444?text=No+Poster+Available" />
-        : <img src={props.poster} />
-      }
-      <h3>{props.rating}</h3>
-    </div>
-  );
+  render() {
+    let showOrHide;
+    (this.props.hidden) ? showOrHide = "hidden" : showOrHide = "revealed";
+
+    return (
+      <div className="film-panel">
+        <h2>{this.props.title}</h2>
+        {
+          (this.props.poster == "N/A")
+          ? <img src="http://placehold.it/300x444?text=No+Poster+Available" />
+          : <img src={this.props.poster} />
+        }
+        <h3 className={showOrHide}>{this.props.rating}</h3>
+      </div>
+    );
+  }
+    
 
 };
-
-export default FilmPanel;

@@ -13,7 +13,7 @@ const FilmList = props => {
   if(results[0].Error || results[1].Error) {
     films = <NoFilms />
   } else {
-    films = results.map(film => <FilmPanel title={film.Title} poster={film.Poster} rating={film.Metascore} key={film.imdbID} />);
+    films = results.map(film => <FilmPanel title={film.Title} poster={film.Poster} rating={film.Metascore} key={film.imdbID} hidden={props.hidden} />);
   }
 
   return(

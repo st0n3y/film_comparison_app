@@ -11,10 +11,13 @@ export default class App extends Component {
     this.state = {
       films: [],
       loading: true,
+      hidden: true,
     };
   }
 
-  
+  componentDidMount() {
+    this.performSearch();
+  }
 
   performSearch = (query1 = "la la land", query2 = "moonlight") => {
     const filmArray = [];
@@ -31,7 +34,8 @@ export default class App extends Component {
                   .then(() => {
                     this.setState({
                       films: filmArray,
-                      loading: false
+                      loading: false,
+                      hidden: true
                     })
                   })
           })
@@ -40,21 +44,31 @@ export default class App extends Component {
           });
   }
 
+  revealScores = () => {
+    this.setState({
+      hidden: false
+    })
+  }
+
   render() {
     console.log("App component state: ", this.state);
+    let film1 = this.state.films[0];
+    let film2 = this.state.films[1];
+
     return ( 
       <div>
         <div>
-          <h1>Film Comparison</h1>
+          <h1>Compare Film Scores</h1>
         </div>
         <div>
           {
             (this.state.loading)
             ? <h3>Loading...</h3>
-            : <FilmList film1={this.state.films[0]} film2={this.state.films[1]} />
+            : <FilmList film1={film1} film2={film2} hidden={this.state.hidden} />
           }
         </div>
         <SearchForm onSearch={this.performSearch} />
+        <button onClick={this.revealScores}>Reveal Scores</button>
       </div>
     );
 
