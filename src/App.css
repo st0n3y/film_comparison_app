@@ -24,3 +24,8 @@ input {
 .hidden {
   visibility: hidden;
 }
+
+.guess-box {
+  border: 1px solid red;
+  cursor: pointer;
+}

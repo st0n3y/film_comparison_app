@@ -12,6 +12,7 @@ export default class App extends Component {
       films: [],
       loading: true,
       hidden: true,
+      winner: ""
     };
   }
 
@@ -38,20 +39,43 @@ export default class App extends Component {
                       hidden: true
                     })
                   })
+                  .then(() => {
+                    this.findWinner();
+                  })
           })
           .catch(error => {
             console.log("Error fetching or parsing data", error);
           });
   }
 
-  revealScores = () => {
+  findWinner = () => {
+    let winner;
+    let film1 = this.state.films[0].data;
+    let film2 = this.state.films[1].data;
+    
+    if(film1.Metascore > film2.Metascore) {
+      winner = film1.imdbID;
+    } else {
+      winner = film2.imdbID;
+    }
     this.setState({
-      hidden: false
+      winner: winner
     })
   }
 
+  revealScores = (panel) => {
+    this.setState({
+      hidden: false
+    })
+    if(panel.id == this.state.winner) {
+      console.log("You chose correctly!")
+    } else {
+      console.log("You lose.")
+    }
+  }
+
   render() {
-    console.log("App component state: ", this.state);
+    
     let film1 = this.state.films[0];
     let film2 = this.state.films[1];
 
@@ -68,7 +92,6 @@ export default class App extends Component {
           }
         </div>
         <SearchForm onSearch={this.performSearch} />
-        <button onClick={this.revealScores}>Reveal Scores</button>
       </div>
     );
 
