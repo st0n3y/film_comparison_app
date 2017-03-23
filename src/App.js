@@ -69,6 +69,8 @@ export default class App extends Component {
     })
     if(panel.id == this.state.winner) {
       console.log("You chose correctly!")
+      panel.style.borderColor = "green";
+      panel.style.borderWidth = "3px";
     } else {
       console.log("You lose.")
     }
@@ -84,6 +86,7 @@ export default class App extends Component {
         <div>
           <h1>Compare Film Scores</h1>
         </div>
+        <SearchForm onSearch={this.performSearch} />
         <div>
           {
             (this.state.loading)
@@ -91,7 +94,7 @@ export default class App extends Component {
             : <FilmList film1={film1} film2={film2} hidden={this.state.hidden} onGuess={this.revealScores} />
           }
         </div>
-        <SearchForm onSearch={this.performSearch} />
+        
       </div>
     );
 

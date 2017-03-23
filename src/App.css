@@ -15,6 +15,7 @@ h1 {
   margin: 10px;
   padding: 5px;
   border: 1px solid red;
+  max-width: 50%;
 }
 
 input {
@@ -28,4 +29,11 @@ input {
 .guess-box {
   border: 1px solid red;
   cursor: pointer;
+  text-align: center;
+}
+
+.search-box {
+  border: 1px solid red;
+  padding: 5px;
+  width: 50%;
 }
